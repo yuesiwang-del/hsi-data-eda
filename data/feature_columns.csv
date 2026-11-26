@@ -1,0 +1,13 @@
+feature
+log_return
+lag_1
+lag_2
+lag_3
+lag_5
+lag_10
+rolling_mean_5
+rolling_std_5
+rolling_mean_20
+rolling_std_20
+rolling_mean_60
+rolling_std_60

@@ -1,0 +1,5 @@
+[project]
+name = "hsi-data-eda"
+version = "1.0.0"
+requires-python = ">=3.12,<3.13"
+dependencies = ["pandas>=2.2,<3", "scipy>=1.14,<2", "statsmodels>=0.14,<0.15", "matplotlib>=3.9,<4", "exchange-calendars>=4.8,<5"]

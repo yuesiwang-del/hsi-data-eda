@@ -1,0 +1,9 @@
+{
+  "source_rows": 4929,
+  "ohlc_flagged": 3,
+  "exact_duplicates_removed": 0,
+  "missing_activity": 0,
+  "calendar_missing": 0,
+  "non_session_stubs_removed": 2,
+  "extreme_returns": 19
+}
