@@ -16,7 +16,7 @@ import pandas as pd
 from scipy import stats
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from statsmodels.stats.diagnostic import acorr_ljungbox, het_arch
-from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.stattools import acf, adfuller, pacf
 
 from supplemental import MARKET_COLUMNS, fetch_supplement
 
@@ -181,9 +181,22 @@ def diagnostics(prices, audit):
         })
         if scope == "all":
             continue
-        for name, series in (("log_close", np.log(sample.close)), ("log_return", returns)):
+        for name, series in (
+            ("close", sample.close), ("log_close", np.log(sample.close)), ("log_return", returns)
+        ):
             adf = adfuller(series, regression="c", autolag="AIC")
             tests.append((name, "ADF", adf[2], adf[0], adf[1]))
+        correlations = []
+        for kind, (values, intervals) in (
+            ("ACF", acf(returns, nlags=40, alpha=0.05)),
+            ("PACF", pacf(returns, nlags=40, alpha=0.05, method="ywm")),
+        ):
+            for lag, (value, (lower, upper)) in enumerate(zip(values, intervals)):
+                if lag:
+                    correlations.append((kind, lag, value, lower, upper, lower > 0 or upper < 0))
+        pd.DataFrame(correlations, columns=[
+            "type", "lag", "coefficient", "ci_lower", "ci_upper", "excludes_zero"
+        ]).to_csv(REPORT / "train_correlations.csv", index=False)
         for name, series in (("log_return", returns), ("squared_return", returns**2)):
             lb = acorr_ljungbox(series, lags=[5, 10, 20], return_df=True)
             for lag, row in lb.iterrows():
