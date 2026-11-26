@@ -3,13 +3,15 @@ import argparse
 from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import json
+import os
 from pathlib import Path
 import time
 from urllib.request import urlopen
 
+# Colab can pass an inline backend that is unavailable in the project environment.
+os.environ["MPLBACKEND"] = "Agg"
+
 import exchange_calendars as xcals
-import matplotlib
-matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
