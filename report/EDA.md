@@ -18,9 +18,13 @@
 
 训练集的日收益率均值为 −0.00409%，方差为 0.00024075（小数收益率的平方），偏度为 0.08619，超额峰度为 7.32802。Jarque–Bera 统计量为 9,065.48，正态性假设被显著拒绝。偏度接近零，而超额峰度明显为正，直方图与正态 Q–Q 图也显示尾部偏离。全样本超额峰度为 8.20634。表中的极小 p 值可能因浮点下溢显示为 0。[描述统计](descriptive_stats.csv)
 
-20 日滚动标准差显示波动在相邻交易日内集中。2008 年金融危机期间的波动尤为明显。图中的雷曼破产、世卫组织宣布新冠疫情构成全球大流行、美联储首次加息分别用于定位事件发生期，事件标注用于交代背景。爬虫从腾讯财经恒指「港股新闻」接口抓取前十页和最后一页，扫描 561 条标题记录，以关键词筛查候选，找到 2026-11-26 15:03 发布的恒指扩容报道。图中使用报道发布日期。最后一页最早返回 2022-08-23，前三项历史事件的日期采用机构记录。图表读取归档的事件表，新闻字段仅用于 EDA。[抓取覆盖](news_coverage.csv) · [筛查结果](news_candidates.csv) · [CSV 直链](https://raw.githubusercontent.com/yuesiwang-del/hsi-data-eda/main/report/news_candidates.csv) · [事件及来源](events.csv)
+20 日滚动标准差显示波动在相邻交易日内集中，2008 年金融危机期间尤为明显。事件标注从数据出发，以训练集收益率中位数为基准，筛选偏离超过 6 个稳健标准差的交易日，再按日期查询腾讯 `hkHSI` 新闻，并核对可取得的港交所资料。18 个异常日中有 15 日早于腾讯栏目可查起点 2022-08-23。在可查的 3 日中，2022-11-11 的新闻确认了恒指上涨，但本次未核实到相应的恒指政策或其他独立事件，因此只留在异常表和候选表。[异常日](extreme_returns.csv) · [腾讯查询覆盖](news_coverage.csv) · [候选报道及腾讯原址](news_candidates.csv)
 
-香港市场也有独立的疫情事件记录。2020-02-04，香港证监会与联交所就疫情限制下上市公司如何披露业绩发布联合声明。2020-03-16，两家机构发布进一步指引。图中的 2020-03-11 标的是世卫组织对全球疫情的定性，港交所两则公告用于补充香港市场的监管背景。[2 月 4 日联合声明](https://www.hkex.com.hk/News/Regulatory-Announcements/2020/200204news?sc_lang=zh-HK) · [3 月 16 日进一步指引](https://www.hkex.com.hk/News/Regulatory-Announcements/2020/2003163news?sc_lang=zh-HK)
+- **2008-10-27**：恒指收于 11,015.84 点，下跌 1,602.54 点。港交所当天因媒体查询发布恒指异常跌幅的专项市场统计，记录的简单收益率约 −12.7%。[港交所当日公告](https://www.hkex.com.hk/News/Regulatory-Announcements/2008/081027news?sc_lang=en)
+- **2024-10-08**：恒指简单收益率约 −9.41%。腾讯报道记录恒指大跌和市场成交创新高，港交所统计记载当日市场成交额约 6,207 亿港元。图上标的是当日市场事件。[腾讯报道](https://gu.qq.com/resources/shy/news/detail-v2/index.html#/index?id=nesSN2024100818541795982525&s=b)
+- **2025-04-07**：恒指简单收益率约 −13.22%，跌破 20,000 点。腾讯报道记录香港财政司司长对市场波动的回应，港交所统计记载当日市场成交额约 6,210 亿港元。图上标的是当日下跌与回应。[腾讯报道](https://gu.qq.com/resources/shy/news/detail-v2/index.html#/index?id=nesSN202504072200199730cc59&s=b)
+
+港交所成交额是市场背景。三条标注均为与恒指异常同日的可核实记录，未据此推断下跌原因。疫情期间可从完整走势观察，本次筛选与核对没有产生疫情事件标注。[港交所年度市场统计](https://www.hkex.com.hk/-/media/HKEX-Market/Market-Data/Statistics/Consolidated-Reports/Annual-Market-Statistics/2025FY-Annual-Market-Stat_Eng.pdf) · [标注清单](events.csv)
 
 ![指数、滚动均值、收益率和滚动波动率](figures/01_trends.png)
 

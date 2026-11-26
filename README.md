@@ -52,8 +52,6 @@ uv run --locked python pipeline.py --download
 
 成交量来自[港交所主板统计档案](https://www.hkex.com.hk/Market-Data/Statistics/Consolidated-Reports/Securities-Statistics-Archive/Trading_Value_Volume_And_Number_Of_Deals?sc_lang=en)及[逐日日报](https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261126e.htm)。抓取地址和响应校验值见 [补充数据请求清单](data/supplement_manifest.json)。
 
-### 腾讯新闻事件
+### 恒指异常交易日与新闻
 
-运行 `uv run --locked python news_events.py` 可刷新腾讯港股新闻扫描。脚本抓取前十页和接口返回的最后一页，按标题关键词提取候选供核对。[抓取覆盖](report/news_coverage.csv) · [候选报道](report/news_candidates.csv) · [最终图表事件及来源](report/events.csv)
-
-固定版图表读取已核对的事件表。2026-11-26 的「恒指扩容报道」标在报道发布日期。2008 年雷曼破产、2020 年疫情、2022 年首次加息早于本次腾讯新闻接口最早可获得的日期，使用机构记录核对。
+先用 [18 个异常交易日](report/extreme_returns.csv) 定日期，再运行 `uv run --locked python news_events.py` 按日查询腾讯恒指新闻。仅保留明确提及恒生指数或恒指的标题，候选表内有报道原网址及爬虫实际请求网址。[查询覆盖](report/news_coverage.csv) · [候选报道](report/news_candidates.csv) · [核对后入图的日期及来源](report/events.csv)

@@ -228,6 +228,7 @@ def plot(prices):
         axes[0].text(point, 0.03, label, rotation=90, va="bottom", ha="right",
                      transform=axes[0].get_xaxis_transform(), fontsize=8)
     axes[1].plot(r * 100, lw=0.55, color="#266971")
+    axes[1].scatter(events.date, r.loc[events.date] * 100, color="firebrick", s=16, zorder=4)
     axes[2].plot(r.rolling(20).mean() * 100, lw=0.8, color="#266971")
     axes[3].plot(r.rolling(20).std() * 100, lw=0.8, color="#266971")
     for ax, label in zip(axes[1:], ["Log return (%)", "20-session mean (%)", "20-session SD (%)"]):

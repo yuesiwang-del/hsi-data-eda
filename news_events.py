@@ -1,6 +1,7 @@
 """Scan the Tencent HSI news feed and save dated event candidates for review."""
 import json
 from pathlib import Path
+from functools import lru_cache
 import re
 from urllib.parse import urlencode
 from urllib.request import urlopen
@@ -8,7 +9,7 @@ from urllib.request import urlopen
 import pandas as pd
 
 ENDPOINT = "https://proxy.finance.qq.com/ifzqgtimg/appstock/news/info/search"
-KEYWORDS = re.compile(r"首次扩容|指数调整|熔断|暂停交易|紧急降息|加息决议|申请破产|大流行")
+KEYWORDS = re.compile(r"恒生指数|恒指")
 
 
 def fetch_page(page):
@@ -24,26 +25,48 @@ def fetch_page(page):
 
 
 def scan(folder):
-    first, url = fetch_page(1)
-    total = int(first["total_page"])
-    pages = {1: (first, url)}
-    for page in sorted({*range(2, min(total, 10) + 1), total} - {1}):
-        pages[page] = fetch_page(page)
+    @lru_cache(maxsize=None)
+    def lookup(page):
+        return fetch_page(page)
 
+    first, _ = lookup(1)
+    last_page = int(first["total_page"])
+    latest = first["data"][0]["time"][:10]
+    oldest = lookup(last_page)[0]["data"][-1]["time"][:10]
+    anomalies = pd.read_csv(folder / "extreme_returns.csv")
     coverage, candidates = [], {}
-    for page, (result, url) in pages.items():
-        rows = result["data"]
-        times = [row["time"] for row in rows]
-        coverage.append((page, len(rows), min(times, default=""), max(times, default=""), url))
-        for row in rows:
-            if KEYWORDS.search(row["title"]):
-                candidates[row["id"]] = (row["time"], row["title"], row["url"])
-    pd.DataFrame(coverage, columns=["page", "rows", "first_time", "last_time", "request_url"]).to_csv(
+    for date in anomalies.date:
+        coverage_status = "outside_feed" if not oldest <= date <= latest else "searched"
+        pages = set()
+        if coverage_status == "searched":
+            # Find the first page whose oldest date is at or before the anomaly.
+            left, right = 1, last_page
+            while left < right:
+                middle = (left + right) // 2
+                rows = lookup(middle)[0]["data"]
+                days = [row["time"][:10] for row in rows]
+                if not days or days != sorted(days, reverse=True):
+                    raise ValueError(f"Invalid Tencent date order on page {middle}")
+                if days[-1] > date:
+                    left = middle + 1
+                else:
+                    right = middle
+            for page in range(left, last_page + 1):
+                result, url = lookup(page)
+                pages.add(page)
+                for row in result["data"]:
+                    if (row["time"][:10] == date and KEYWORDS.search(row["title"])
+                            and "hkHSI" in row.get("symbols", [])):
+                        candidates[row["id"]] = (date, row["time"], row["title"], row["url"], url)
+                if not result["data"] or result["data"][-1]["time"][:10] < date:
+                    break
+        coverage.append((date, coverage_status, oldest, latest, ",".join(map(str, sorted(pages)))))
+    pd.DataFrame(coverage, columns=["date", "status", "feed_oldest", "feed_latest", "pages"]).to_csv(
         folder / "news_coverage.csv", index=False
     )
-    pd.DataFrame(candidates.values(), columns=["published_at_hkt", "title", "url"]).sort_values(
-        "published_at_hkt"
-    ).to_csv(folder / "news_candidates.csv", index=False)
+    pd.DataFrame(candidates.values(), columns=[
+        "date", "published_at_hkt", "title", "url", "request_url"
+    ]).sort_values("published_at_hkt").to_csv(folder / "news_candidates.csv", index=False)
 
 
 if __name__ == "__main__":
