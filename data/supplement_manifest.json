@@ -1,0 +1,102 @@
+[
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/mthbull/rpt_data_statistics_archive_trading_data_2005_2009.json",
+    "sha256": "e648cf05e0b3c1d9baa47423f6287d5964836b5bfcd176b4aad7c63edb65038a"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/mthbull/rpt_data_statistics_archive_trading_data_2010_2014.json",
+    "sha256": "5b76af37134e7cac4382f5860fd6c5a87eddfdcb92c312fe4291c56dbfaa9283"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/mthbull/rpt_data_statistics_archive_trading_data_2015_2019.json",
+    "sha256": "4a4f2447886fefe500a881b27c1e08facd9b4fe49795d1f04baad34e5d1faf9c"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/mthbull/rpt_data_statistics_archive_trading_data_2020_2024.json",
+    "sha256": "83f7f027f127b182d3a7bd935e76c64c6eb20126f62b1aa77cc4616db15f5a80"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/mthbull/rpt_data_statistics_archive_trading_data_2025_2029.json",
+    "sha256": "5a9c1fbd6f08c2e1add74424a7d5c9929ffb3100433b0940070992a734eef01e"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261102e.htm",
+    "sha256": "c7cc7ecd55c39a641b24c9c2281060be69d26de21fb2d1c0714b7e49adb9820f"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261103e.htm",
+    "sha256": "3516e287f1f00c8047aaac318f93ae4e116bb8cdac144cb17ec9584676e1eda8"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261104e.htm",
+    "sha256": "d3698233eb65bcad1bc702416e0fe953ed953be1c216c09cbe19a76b0f48c01d"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261105e.htm",
+    "sha256": "23d3310a496a8ab1b9da7748a292ac39311a2a7060cda9e9cf12b591e5587d23"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261106e.htm",
+    "sha256": "b9ee993442567f7dfad71304c4ef5146de10aaf28d195b4b24871f9cb9ea29f8"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261109e.htm",
+    "sha256": "19d23762bbeed2aaaf768e1156f886f96140bf946b04039f29833c2bfdb0daa3"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261110e.htm",
+    "sha256": "f4e208738e1a32ecf15faef6d7c314533b1bdff3e3f357fc01855c4b2d7df77b"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261111e.htm",
+    "sha256": "d4367b146ad98dbac318de584df47cd715dfd3a40f8eb08f94976a0f5ada6637"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261112e.htm",
+    "sha256": "2c26f6b57d6096b077a00e9923fc268c1fe6276e25a1a69ac09cddc96dc8bd17"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261113e.htm",
+    "sha256": "4c3968fa933bdbada10f5417f11bd125521649ca7f5abd6c9d5f285b2d70ffcd"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261116e.htm",
+    "sha256": "78bf794de31a64f3617da415e122759086491a292a3497250496074c52ed9e4b"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261117e.htm",
+    "sha256": "18b390837f04ef8e078f16973f79d176142216a4f354e5d68e6ba98dea49505e"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261118e.htm",
+    "sha256": "2cc842753ca7b7a1a0a5fb9fd7b24fc01499ae49d8462725d6ed948e5c84ca37"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261119e.htm",
+    "sha256": "5d4815d3ce0666112c5dae4fa39b2b92a7d4146d62735a94187ccd271231a5fa"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261120e.htm",
+    "sha256": "14e0a067ea608de91dd078a2f34826724c98b3909b26610a9ce64b649b343795"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261123e.htm",
+    "sha256": "c483b83de7d1f447fb3a326732b0708c76a569518880032b45cb594fb36cc0bc"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261124e.htm",
+    "sha256": "f4019ff7af8249bc19833b419c57e4e8238ca9c58213ff447a493640f0a17fd4"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261125e.htm",
+    "sha256": "b97f1aa18b95b80a3d981fcfb64b8effa625b6a1e65768ae2694841e2575c0f6"
+  },
+  {
+    "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261126e.htm",
+    "sha256": "1a9dd50344d6a4f38059a617b785989d76bf8eefaa830aa1b8451f6176d285fd"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/cran/quarks/15b9b176cd6e9b4d328fba0567b52bddc8447af2/data/HSI.rda",
+    "sha256": "a728474aeda4b5057822c5497e3b0e6c9e8c6f7101e65bfafee5ece4a8f3f2ef"
+  }
+]

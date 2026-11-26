@@ -18,6 +18,8 @@ from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from statsmodels.stats.diagnostic import acorr_ljungbox, het_arch
 from statsmodels.tsa.stattools import adfuller
 
+from supplemental import MARKET_COLUMNS, fetch_supplement
+
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data"
 REPORT = ROOT / "report"
@@ -61,7 +63,7 @@ def download():
     )
 
 
-def clean():
+def clean(refresh=False):
     raw = pd.read_csv(DATA / "source_snapshot.csv", parse_dates=["date"])
     dedup = raw.drop_duplicates()
     if dedup.date.isna().any() or dedup.date.duplicated().any():
@@ -115,13 +117,37 @@ def clean():
     median = train.median()
     mad = (train - median).abs().median()
     prices["extreme_return"] = (prices.log_return - median).abs() > 6 * 1.4826 * mad
+    supplement_path = DATA / "market_supplement.csv"
+    if refresh or not supplement_path.exists():
+        fetch_supplement(prices.index, DATA)
+    supplement = pd.read_csv(supplement_path, index_col="date", parse_dates=True)
+    if not supplement.index.equals(prices.index):
+        raise ValueError("Market supplement dates differ. Refresh with --download.")
+    if supplement[MARKET_COLUMNS].isna().any().any() or not supplement[MARKET_COLUMNS].gt(0).all().all():
+        raise ValueError("HKEX market volume and turnover must cover all trading days")
+    prices = prices.join(supplement[MARKET_COLUMNS + ["adjusted_close"]])
+    yahoo = supplement[["yahoo_open", "yahoo_high", "yahoo_low", "yahoo_close"]].round(2)
+    repaired = (
+        prices.ohlc_flag & np.isclose(yahoo.yahoo_close, prices.close, atol=0.01, rtol=0)
+        & yahoo.gt(0).all(axis=1)
+        & yahoo.yahoo_high.ge(yahoo[["yahoo_open", "yahoo_close"]].max(axis=1))
+        & yahoo.yahoo_low.le(yahoo[["yahoo_open", "yahoo_close"]].min(axis=1))
+    )
+    for field in ("open", "high", "low"):
+        prices.loc[repaired, field] = yahoo.loc[repaired, f"yahoo_{field}"]
+    prices["ohlc_repaired_from_yahoo"] = repaired
+    prices.loc[prices.adjusted_close.isna(), []].to_csv(REPORT / "missing_adjusted_close.csv")
     prices.to_csv(DATA / "hsi_clean.csv")
     prices[["close", "log_return", "split"]].dropna().to_csv(DATA / "returns.csv")
     prices.loc[prices.extreme_return, ["close", "log_return"]].to_csv(
         REPORT / "extreme_returns.csv"
     )
     return prices, {
-        "source_rows": len(raw), "ohlc_flagged": int(prices.ohlc_flag.sum()), "exact_duplicates_removed": len(raw) - len(dedup),
+        "source_rows": len(raw),
+        "missing_adjusted_close": int(prices.adjusted_close.isna().sum()),
+        "ohlc_flagged": int(prices.ohlc_flag.sum()),
+        "ohlc_repaired_from_yahoo": int(repaired.sum()),
+        "exact_duplicates_removed": len(raw) - len(dedup),
         "missing_activity": int(prices.provider_activity.isna().sum()),
         "calendar_missing": len(absent), "non_session_stubs_removed": len(dropped),
         "extreme_returns": int(prices.extreme_return.sum()),
@@ -144,6 +170,10 @@ def make_features(prices):
     features["split"] = prices.split.shift(-1)
     features = features.dropna().rename_axis("origin_date")
     features.to_csv(DATA / "features.csv")
+    # Publish optional market activity without changing existing model inputs.
+    features[["target_date", "split"]].join(prices[MARKET_COLUMNS]).to_csv(
+        DATA / "optional_market_features.csv"
+    )
     pd.DataFrame({"feature": FEATURES}).to_csv(DATA / "feature_columns.csv", index=False)
     features.groupby("split")["target_date"].agg(["count", "min", "max"]).to_csv(
         DATA / "split_summary.csv"
@@ -258,7 +288,7 @@ def main():
         folder.mkdir(parents=True, exist_ok=True)
     if args.download or not (DATA / "source_snapshot.csv").exists():
         download()
-    prices, audit = clean()
+    prices, audit = clean(refresh=args.download)
     features = make_features(prices)
     diagnostics(prices, audit)
     plot(prices)

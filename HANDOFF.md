@@ -4,9 +4,12 @@
 
 | 文件或字段 | 定义 |
 | --- | --- |
-| `hsi_clean.csv` | 4,800 个交易日，含日期、指数开高低收、供应商活动值、收益率、数据质量标记及当日切分。首日无前一日收盘，收益率留空 |
-| `open/high/low/close` | 指数点数。两条 OHLC 不一致的记录保留供应商收盘，开高低留空，见 `ohlc_flag` 和审计表 |
+| `hsi_clean.csv` | 4,800 个交易日，含日期、指数开高低收、调整收盘价、港交所主板成交量及成交额、供应商活动值、收益率、数据质量标记及当日切分。首日无前一日收盘，收益率留空 |
+| `open/high/low/close` | 指数点数。两条源 OHLC 异常保留腾讯收盘，其余价格以同日归档雅虎行情校正，见 `ohlc_flag`、`ohlc_repaired_from_yahoo` 和审计表 |
 | `provider_activity` | 腾讯接口第六项。抽查与港股主板成交额（港元）吻合。保留原列名和数值，核对依据见 EDA 章节 |
+| `main_board_volume_shares`、`main_board_turnover_hkd` | 港交所主板市场成交股数、成交额，分别以股和港元计。均覆盖 4,800 日 |
+| `adjusted_close` | 归档雅虎 `^HSI` 的调整收盘点位，覆盖至 2023-12-29；后续 716 日缺值。模型统一使用腾讯收盘计算目标收益 |
+| `optional_market_features.csv` | 在 `origin_date` 当天收盘形成的两列港交所主板行情，可按 `origin_date` 和 `target_date` 接入 C/D 的可选扩展实验 |
 | `extreme_return` | 收益率距训练集中位数超过 6 个稳健标准差的标记，用于审计 |
 | `returns.csv` | 4,799 条有效的当日对数收益率，含收盘和按当日日期标记的切分 |
 | `features.csv` | 4,739 条次日预测样本。因 60 日窗口预热，价格样本的最前 60 日无法充当预测起点，末日缺少次日标签 |
