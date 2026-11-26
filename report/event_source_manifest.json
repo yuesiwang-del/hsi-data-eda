@@ -1,0 +1,41 @@
+[
+  {
+    "date": "2008-10-27",
+    "source": "HKEX",
+    "url": "https://www.hkex.com.hk/News/Regulatory-Announcements/2008/081027news?sc_lang=en",
+    "sha256": "1b5c3f87b82567d8619cf115c40d6c37ae6d541082759402edad94492f3e72f7",
+    "excerpt": "The Hang Seng Index (HSI) closed at 11015.84 today, down 1602.54 points, or 12.7 per cent."
+  },
+  {
+    "date": "2024-10-08",
+    "source": "Tencent Finance",
+    "url": "https://proxy.finance.qq.com/ifzqgtimg/appstock/news/info/search?_appver=1.0&page=70&symbol=hkHSI&n=51&_var=finance_news&type=2",
+    "sha256": "6d3542c4b32521b8b7affaea67e852460929e790c7edaadd009bbcd3045811e1",
+    "article_url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html#/index?id=nesSN2024100818541795982525&s=b",
+    "published_at_hkt": "2024-10-08 18:41:02",
+    "title": "股市特别报道｜恒生指数大跌逾9% 成交创历史天量 后市怎么走？"
+  },
+  {
+    "date": "2024-10-08",
+    "source": "HKEX",
+    "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Market-Data/Statistics/Consolidated-Reports/Annual-Market-Statistics/2025FY-Annual-Market-Stat_Eng.pdf",
+    "sha256": "0883785e22c546a8a0f881bceb7868b6c7c63b8bfb3c141b45561847cb122d78",
+    "excerpt": "Daily market turnover: HKD 620.7 billion (8 Oct 2024)"
+  },
+  {
+    "date": "2025-04-07",
+    "source": "Tencent Finance",
+    "url": "https://proxy.finance.qq.com/ifzqgtimg/appstock/news/info/search?_appver=1.0&page=64&symbol=hkHSI&n=51&_var=finance_news&type=2",
+    "sha256": "d5f68f780ff9216738eb76d8a43f0924fdd4629a965a8a58060eecc3e96f09d1",
+    "article_url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html#/index?id=nesSN202504072200199730cc59&s=b",
+    "published_at_hkt": "2025-04-07 21:59:04",
+    "title": "香港恒生指数失守20000点关口 陈茂波：香港金融体系仍稳健"
+  },
+  {
+    "date": "2025-04-07",
+    "source": "HKEX",
+    "url": "https://www.hkex.com.hk/-/media/HKEX-Market/Market-Data/Statistics/Consolidated-Reports/Annual-Market-Statistics/2025FY-Annual-Market-Stat_Eng.pdf",
+    "sha256": "0883785e22c546a8a0f881bceb7868b6c7c63b8bfb3c141b45561847cb122d78",
+    "excerpt": "Daily market turnover: HKD 621.0 billion (7 Apr 2025)"
+  }
+]

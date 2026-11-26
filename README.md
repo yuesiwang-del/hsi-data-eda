@@ -55,3 +55,5 @@ uv run --locked python pipeline.py --download
 ### 恒指异常交易日与新闻
 
 先用 [18 个异常交易日](report/extreme_returns.csv) 定日期，再运行 `uv run --locked python news_events.py` 按日查询腾讯恒指新闻。仅保留明确提及恒生指数或恒指的标题，候选表内有报道原网址及爬虫实际请求网址。[查询覆盖](report/news_coverage.csv) · [候选报道](report/news_candidates.csv) · [核对后入图的日期及来源](report/events.csv)
+
+运行 `uv run --locked python verify_event_sources.py` 会重新请求三个标注使用的原始来源：港交所 2008 年公告、港交所年度统计 PDF，以及两条腾讯新闻的原始接口页。程序核对公告正文、PDF 成交额行和腾讯接口里的标题与发布时间，并保存[原网址、提取结果和响应校验值](report/event_source_manifest.json)。腾讯接口返回的新闻详情链接也保存在清单中。
