@@ -3,120 +3,132 @@
     "year": 2005,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2005-01-01,2005-12-31,640,qfq",
     "rows": 247,
-    "sha256": "1cfebd28bd1720acf14bd32ef34f6ffd761e2c74ac25c942135b04ed754f1d32"
+    "sha256": "7b7a37a346c794067eebc57c8100ba6e4c4a5508ff5430b9bda5b57cff05d93c"
   },
   {
     "year": 2006,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2006-01-01,2006-12-31,640,qfq",
     "rows": 247,
-    "sha256": "6583290b44f630249c114c7f677b0803d814ba0675684ae87d8b216d95ab8955"
+    "sha256": "71a3066a443fb86def8f84d78facf6d0021fd4da551e2192fbd5c7427a78ee8a"
   },
   {
     "year": 2007,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2007-01-01,2007-12-31,640,qfq",
     "rows": 246,
-    "sha256": "25d4fa1f47688ec682b56d27a9ba35ea61008bb6479723d089498a1f4fad4fa0"
+    "sha256": "4b4c80afc2601bd4170cd8063b8c763529e55c4d7dc0e3e9ed167b4f5149e6c9"
   },
   {
     "year": 2008,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2008-01-01,2008-12-31,640,qfq",
     "rows": 245,
-    "sha256": "23ed93532f6b2db5d883b2bcc1d8c1690a61140c53c34e21393fef65f4b569ce"
+    "sha256": "538830be89ef41092cead5640dd95bbfb7b1de36bf0ef94594669cefebf08ccc"
   },
   {
     "year": 2009,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2009-01-01,2009-12-31,640,qfq",
     "rows": 249,
-    "sha256": "b6d2d57c603bdf2ae72757c4679e38daa3a813fe780f566bf2323f59ef56372f"
+    "sha256": "4c451679e97368f8e39792d490b0db9edc80af909e478285fad89e1b59fa2152"
   },
   {
     "year": 2010,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2010-01-01,2010-12-31,640,qfq",
     "rows": 249,
-    "sha256": "8b9ad31d37622d0d296c7c8aa5d1d6a6c43ca6342b4e0dd6d51df95bd8479598"
+    "sha256": "dd89199f24a0f5a9f8ff778644befc72b799a04015f4dbca6423dba32ffef037"
   },
   {
     "year": 2011,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2011-01-01,2011-12-31,640,qfq",
     "rows": 246,
-    "sha256": "a9f365e06b0df919f7b609ccd00deb12feeb73da070ab2da4910413a2e9d1cdc"
+    "sha256": "5ee587de3d6d0335a04a53fbe68c298cc542f833643b4af69b0a89127629321a"
   },
   {
     "year": 2012,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2012-01-01,2012-12-31,640,qfq",
     "rows": 247,
-    "sha256": "7c388e788f07389dd9c25b602306accae92190a164e7f1cdd75bee84b0733eb4"
+    "sha256": "73a42fb60680d992bfcae0f7e96a52b7ee835c99db083eb583fb27c711a6bdad"
   },
   {
     "year": 2013,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2013-01-01,2013-12-31,640,qfq",
     "rows": 244,
-    "sha256": "8592427e5677e67dc0970a8dec898a8d4ddfb404fa68e03c357fcf2dab5d8682"
+    "sha256": "3b778867b3bc564bf3ccb71d2996b32bc84fd77d431064cc07de631835ca79ec"
   },
   {
     "year": 2014,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2014-01-01,2014-12-31,640,qfq",
     "rows": 247,
-    "sha256": "3ab2109f65be91442e12d591ab907d8b7b49c34abfffa1c2da206cf207694a56"
+    "sha256": "518eb9582811c9217042fbe69cfa0cc13adfc55d6ceba7b0f814ce91b57d25f2"
   },
   {
     "year": 2015,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2015-01-01,2015-12-31,640,qfq",
     "rows": 247,
-    "sha256": "cd0963e8132c24e005d0d59b3895ccfde01b5ffa8e708b388d714e24300e44b0"
+    "sha256": "170e1567a3c33e0a94288855d4956da9b7e97f354f893f1d9829aec98c963191"
   },
   {
     "year": 2016,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2016-01-01,2016-12-31,640,qfq",
     "rows": 245,
-    "sha256": "bf2d1699ebe655bb0e6fb5ebdf2aa672d79eff19ca10cb017824826bb1560ce0"
+    "sha256": "e1813de4f9c8596dca80aa54544c05be04330931f2401cd610d3ef06bee95503"
   },
   {
     "year": 2017,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2017-01-01,2017-12-31,640,qfq",
     "rows": 246,
-    "sha256": "abe3ac29fd1984b70ffd333230824f5492a5910fce73de50f83d2d5ed09d8870"
+    "sha256": "7cad75ad951bdaf47eaa1e0636a62605533d05e7656487829bc9d260fe5b6ea2"
   },
   {
     "year": 2018,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2018-01-01,2018-12-31,640,qfq",
     "rows": 246,
-    "sha256": "e48fb47825c2896d14fc4cb179eba117cefce9bc343ec42e4c6753334d7ca17c"
+    "sha256": "2919baa331712004cbe568ebbe91460327e8466fc26469e2109f1751505e9c2b"
   },
   {
     "year": 2019,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2019-01-01,2019-12-31,640,qfq",
     "rows": 246,
-    "sha256": "0079cb53050a64fbac273691b7bc890ed4a08f610a43559ddeecd898ea8de818"
+    "sha256": "112a0a100b5f3940a0b7ddb0768a3363cc968767c8fa66eb34690d8664282ac6"
   },
   {
     "year": 2020,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2020-01-01,2020-12-31,640,qfq",
     "rows": 249,
-    "sha256": "ed78805b9d342517f164e7d629e33fe1eb837c2cf34359fbc1d9ba9ba1fe0429"
+    "sha256": "e8d6d1786d64fa33085f9cd1587f4e4ea23554e9b1bb1b68045a338023ae9bb6"
   },
   {
     "year": 2021,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2021-01-01,2021-12-31,640,qfq",
     "rows": 247,
-    "sha256": "b19d5e075802d5e4ca58fe300f524e8f4f20d399b7a8939189386976c0695b81"
+    "sha256": "d94bc7ec690eaf30b2181ebeef27599868e6a117115c261972b3442d12bbfd12"
   },
   {
     "year": 2022,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2022-01-01,2022-12-31,640,qfq",
     "rows": 246,
-    "sha256": "c208032221ada3dba60796c870146def21be6092ceaa748f06aa63762ea6cbf5"
+    "sha256": "775e5728e83821d750292659649a73e94aa9b643ec74d745b77e116abecc91f7"
   },
   {
     "year": 2023,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2023-01-01,2023-12-31,640,qfq",
     "rows": 244,
-    "sha256": "243aea64bee735bc804287b74da18c34677be7ec5863127ed5e8482005bcfce6"
+    "sha256": "ae19cd54b03e4806c6c238fe070f95aa80047b5cea4d56f853e527bbe121cd87"
   },
   {
     "year": 2024,
     "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2024-01-01,2024-12-31,640,qfq",
     "rows": 246,
-    "sha256": "13fdb98517cad6a7a941ed0988aac00e75e8901f294af3b6ae2ee1e0d207d176"
+    "sha256": "dafef68d141bf4b5b695c84e394cb238ec1c3f25cd23e19b026e33d2761d63d9"
+  },
+  {
+    "year": 2025,
+    "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2025-01-01,2025-12-31,640,qfq",
+    "rows": 246,
+    "sha256": "9fe9f414d5a2817d7903dc90bcb43d13bed6ce31b9000b5bd339414a5b380df9"
+  },
+  {
+    "year": 2026,
+    "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=hkHSI,day,2026-01-01,2026-11-26,640,qfq",
+    "rows": 223,
+    "sha256": "b1e7938490359e2afd94c544e3a8851b5ac8a3a06aac7712bad21e302bb67a39"
   }
 ]

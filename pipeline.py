@@ -22,9 +22,10 @@ ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data"
 REPORT = ROOT / "report"
 FIGURES = REPORT / "figures"
-YEARS = range(2005, 2025)
+AS_OF = pd.Timestamp("2026-11-26")
+YEARS = range(2005, AS_OF.year + 1)
 COUNT = 4800
-TEST_START = pd.Timestamp("2022-01-01")
+TEST_START = AS_OF - pd.DateOffset(years=3)
 SOURCE = "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get"
 COLUMNS = ["date", "open", "close", "high", "low", "provider_activity"]
 FEATURES = ["log_return"] + [f"lag_{i}" for i in (1, 2, 3, 5, 10)] + [
@@ -33,7 +34,8 @@ FEATURES = ["log_return"] + [f"lag_{i}" for i in (1, 2, 3, 5, 10)] + [
 
 
 def fetch_year(year):
-    url = f"{SOURCE}?param=hkHSI,day,{year}-01-01,{year}-12-31,640,qfq"
+    end = min(pd.Timestamp(year, 12, 31), AS_OF).date()
+    url = f"{SOURCE}?param=hkHSI,day,{year}-01-01,{end},640,qfq"
     for attempt in range(3):
         try:
             with urlopen(url, timeout=25) as response:
@@ -74,11 +76,11 @@ def clean():
         & prices.low.le(ohlc[["open", "close", "high"]].min(axis=1))
     )
     prices["ohlc_flag"] = ~valid
-    prices.loc[~valid, ["open", "high", "low", "close"]].to_csv(REPORT / "ohlc_audit.csv")
+    suspect_ohlc = prices.loc[~valid, ["open", "high", "low", "close"]]
     prices.loc[~valid, ["open", "high", "low"]] = np.nan
     activity = prices.provider_activity
     prices["provider_activity"] = activity.where(np.isfinite(activity) & activity.ge(0))
-    calendar = xcals.get_calendar("XHKG", start="2005-01-01", end="2024-12-31")
+    calendar = xcals.get_calendar("XHKG", start="2005-01-01", end=AS_OF)
     sessions = calendar.sessions_in_range(prices.index.min(), prices.index.max())
     outside = ~prices.index.isin(sessions)
     stub = (
@@ -92,6 +94,11 @@ def clean():
     prices = prices.loc[~outside].tail(COUNT).copy()
     if len(prices) < COUNT:
         raise ValueError(f"Expected at least {COUNT} observations")
+    if prices.index.max() != AS_OF:
+        raise ValueError(f"Expected closing data through {AS_OF.date()}")
+    suspect_ohlc.loc[suspect_ohlc.index.intersection(prices.index)].to_csv(
+        REPORT / "ohlc_audit.csv"
+    )
     expected = calendar.sessions_in_range(prices.index.min(), prices.index.max())
     absent = expected.difference(prices.index)
     audit = pd.DataFrame(
@@ -239,7 +246,7 @@ def plot(prices):
                 title="Calendar-month distributions | Training set, full months")
     axes[1].bar(annual.index, annual * 100, color=np.where(annual >= 0, "#266971", "firebrick"))
     axes[1].set_xticks(annual.index, annual.index, rotation=45)
-    axes[1].set(ylabel="Annual log return (%)", title="Calendar-year returns | First year partial")
+    axes[1].set(ylabel="Annual log return (%)", title="Calendar-year returns | First and last years partial")
     save(fig, "04_seasonality")
 
 
