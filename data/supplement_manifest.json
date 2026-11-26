@@ -94,9 +94,5 @@
   {
     "url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261126e.htm",
     "sha256": "1a9dd50344d6a4f38059a617b785989d76bf8eefaa830aa1b8451f6176d285fd"
-  },
-  {
-    "url": "https://raw.githubusercontent.com/cran/quarks/15b9b176cd6e9b4d328fba0567b52bddc8447af2/data/HSI.rda",
-    "sha256": "a728474aeda4b5057822c5497e3b0e6c9e8c6f7101e65bfafee5ece4a8f3f2ef"
   }
 ]

@@ -8,5 +8,4 @@ dependencies = [
     "statsmodels>=0.14,<0.15",
     "matplotlib>=3.9,<4",
     "exchange-calendars>=4.8,<5",
-    "rdata>=1,<2",
 ]

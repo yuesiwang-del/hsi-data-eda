@@ -1,22 +1,15 @@
-"""Fetch official HKEX market totals and archived Yahoo adjusted closes."""
+"""Fetch official HKEX market totals."""
 from concurrent.futures import ThreadPoolExecutor
 import hashlib
-import io
 import json
 import re
 import time
 from urllib.request import urlopen
 
-import numpy as np
 import pandas as pd
-import rdata
 
 HKEX = "https://www.hkex.com.hk/eng/stat/smstat"
 ARCHIVE = f"{HKEX}/mthbull/rpt_data_statistics_archive_trading_data"
-QUARKS = (
-    "https://raw.githubusercontent.com/cran/quarks/"
-    "15b9b176cd6e9b4d328fba0567b52bddc8447af2/data/HSI.rda"
-)
 MARKET_COLUMNS = ["main_board_turnover_hkd", "main_board_volume_shares"]
 
 
@@ -80,24 +73,5 @@ def fetch_supplement(dates, folder):
     if market.isna().any().any() or not market.gt(0).all().all():
         raise ValueError(f"Invalid HKEX market totals: {market[market.isna().any(axis=1)].index.tolist()}")
 
-    raw, record = download(QUARKS)
-    manifest.append(record)
-    constructors = {
-        **rdata.conversion.DEFAULT_CLASS_MAP,
-        "tbl": rdata.conversion.dataframe_constructor,
-        "tbl_df": rdata.conversion.dataframe_constructor,
-        "Date": lambda days, _: days,
-    }
-    yahoo = rdata.read_rda(io.BytesIO(raw), constructor_dict=constructors)["HSI"]
-    yahoo.index = pd.to_datetime(yahoo.ref_date, unit="D", origin="unix").rename("date")
-    yahoo = yahoo.rename(columns={
-        "price_adjusted": "adjusted_close",
-        **{f"price_{field}": f"yahoo_{field}" for field in ("open", "high", "low", "close")},
-    })[["adjusted_close", "yahoo_open", "yahoo_high", "yahoo_low", "yahoo_close"]]
-    if not (np.isfinite(yahoo.adjusted_close) & yahoo.adjusted_close.gt(0)).all():
-        raise ValueError("Invalid archived Yahoo adjusted close")
-    if not yahoo.index.is_unique:
-        raise ValueError("Duplicate dates in Yahoo historical snapshot")
-    supplement = market.join(yahoo)
-    supplement.to_csv(folder / "market_supplement.csv", float_format="%.8f")
+    market.to_csv(folder / "market_supplement.csv")
     (folder / "supplement_manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")

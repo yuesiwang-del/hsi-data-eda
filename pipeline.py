@@ -125,18 +125,7 @@ def clean(refresh=False):
         raise ValueError("Market supplement dates differ. Refresh with --download.")
     if supplement[MARKET_COLUMNS].isna().any().any() or not supplement[MARKET_COLUMNS].gt(0).all().all():
         raise ValueError("HKEX market volume and turnover must cover all trading days")
-    prices = prices.join(supplement[MARKET_COLUMNS + ["adjusted_close"]])
-    yahoo = supplement[["yahoo_open", "yahoo_high", "yahoo_low", "yahoo_close"]].round(2)
-    repaired = (
-        prices.ohlc_flag & np.isclose(yahoo.yahoo_close, prices.close, atol=0.01, rtol=0)
-        & yahoo.gt(0).all(axis=1)
-        & yahoo.yahoo_high.ge(yahoo[["yahoo_open", "yahoo_close"]].max(axis=1))
-        & yahoo.yahoo_low.le(yahoo[["yahoo_open", "yahoo_close"]].min(axis=1))
-    )
-    for field in ("open", "high", "low"):
-        prices.loc[repaired, field] = yahoo.loc[repaired, f"yahoo_{field}"]
-    prices["ohlc_repaired_from_yahoo"] = repaired
-    prices.loc[prices.adjusted_close.isna(), []].to_csv(REPORT / "missing_adjusted_close.csv")
+    prices = prices.join(supplement[MARKET_COLUMNS])
     prices.to_csv(DATA / "hsi_clean.csv")
     prices[["close", "log_return", "split"]].dropna().to_csv(DATA / "returns.csv")
     prices.loc[prices.extreme_return, ["close", "log_return"]].to_csv(
@@ -144,9 +133,7 @@ def clean(refresh=False):
     )
     return prices, {
         "source_rows": len(raw),
-        "missing_adjusted_close": int(prices.adjusted_close.isna().sum()),
         "ohlc_flagged": int(prices.ohlc_flag.sum()),
-        "ohlc_repaired_from_yahoo": int(repaired.sum()),
         "exact_duplicates_removed": len(raw) - len(dedup),
         "missing_activity": int(prices.provider_activity.isna().sum()),
         "calendar_missing": len(absent), "non_session_stubs_removed": len(dropped),
@@ -234,9 +221,8 @@ def plot(prices):
     axes[0].plot(prices.close.rolling(60).mean(), label="60-session mean", lw=1)
     axes[0].set_ylabel("Index points")
     axes[0].legend(loc="upper right")
-    for date, label in [("2008-09-15", "Global financial crisis"),
-                        ("2020-03-11", "WHO pandemic declaration"),
-                        ("2022-03-16", "Fed rate hike cycle")]:
+    events = pd.read_csv(REPORT / "events.csv", parse_dates=["date"])
+    for date, label in events[["date", "label"]].itertuples(index=False, name=None):
         point = pd.Timestamp(date)
         axes[0].axvline(point, color="firebrick", alpha=0.6, lw=0.8)
         axes[0].text(point, 0.03, label, rotation=90, va="bottom", ha="right",

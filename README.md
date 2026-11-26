@@ -29,7 +29,7 @@ uv run --locked python pipeline.py
 uv run --locked python pipeline.py --download
 ```
 
-在线运行按 2005 至 2026 年逐年抓取，截止 2026-11-26，并重新抓取港交所及归档雅虎字段，会更新快照及 [请求清单](data/source_manifest.json)。接口可能修订历史数据，作业复现以提交的快照为准。
+在线运行按 2005 至 2026 年逐年抓取，截止 2026-11-26，并重新抓取港交所成交统计，会更新快照及 [请求清单](data/source_manifest.json)。接口可能修订历史数据，作业复现以提交的快照为准。
 
 ## 数据来源
 
@@ -43,11 +43,17 @@ uv run --locked python pipeline.py --download
 | --- | --- |
 | 约 20 年、4,800 个交易日，日期和指数开高低收 | [采集和清洗代码](pipeline.py)、[源数据](data/source_snapshot.csv)、[清洗数据](data/hsi_clean.csv) |
 | 成交量及成交额 | [港交所补充数据](data/market_supplement.csv)，覆盖全部 4,800 日，为港股主板市场口径 |
-| 调整收盘价 | 清洗表的 `adjusted_close` 为归档雅虎字段，覆盖 4,084 日。其余 716 日留空并 [逐日列出](report/missing_adjusted_close.csv) |
+| 调整收盘价 | 腾讯恒生指数接口只有价格指数收盘点位，项目采用该点位；分工图列出的单独调整收盘价未提供 |
 | 休市、缺失、异常、对数收益率 | [EDA 章节](report/EDA.md)、[审计摘要](report/audit.json)、[收益率表](data/returns.csv) |
 | ADF、白噪声检验、均值／方差／偏度／峰度、尖峰厚尾、波动聚集和季节性 | [检验](report/train_tests.csv)、[描述统计](report/descriptive_stats.csv)、[EDA 章节和四张基础图](report/EDA.md) |
 | 趋势、滚动均值／波动率、ACF／PACF、月度和年度图及重大事件 | [图表](report/figures) |
 | 滞后收益率、滚动特征、一次性时间切分和 B/C/D 交接 | [特征](data/features.csv)、[切分表](data/split_summary.csv)、[交接](HANDOFF.md) |
 | 可选外部因子 | [港股主板成交量与成交额](data/optional_market_features.csv)按特征起点对齐，供 C/D 扩展。分工图另列美元指数、美债收益率为可选项 |
 
-成交量来自[港交所主板统计档案](https://www.hkex.com.hk/Market-Data/Statistics/Consolidated-Reports/Securities-Statistics-Archive/Trading_Value_Volume_And_Number_Of_Deals?sc_lang=en)及[逐日日报](https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261126e.htm)，调整收盘价来自 [CRAN quarks 保存的 Yahoo Finance 快照](https://search.r-project.org/CRAN/refmans/quarks/html/HSI.html)。抓取地址和响应校验值见 [补充数据请求清单](data/supplement_manifest.json)。
+成交量来自[港交所主板统计档案](https://www.hkex.com.hk/Market-Data/Statistics/Consolidated-Reports/Securities-Statistics-Archive/Trading_Value_Volume_And_Number_Of_Deals?sc_lang=en)及[逐日日报](https://www.hkex.com.hk/eng/stat/smstat/dayquot/d261126e.htm)。抓取地址和响应校验值见 [补充数据请求清单](data/supplement_manifest.json)。
+
+### 腾讯新闻事件
+
+运行 `uv run --locked python news_events.py` 可刷新腾讯港股新闻扫描。脚本抓取前十页和接口返回的最后一页，按标题关键词提取候选供核对。[抓取覆盖](report/news_coverage.csv) · [候选报道](report/news_candidates.csv) · [最终图表事件及来源](report/events.csv)
+
+固定版图表读取已核对的事件表。2026-11-26 的「恒指扩容报道」标在报道发布日期。2008 年雷曼破产、2020 年疫情、2022 年首次加息早于本次腾讯新闻接口最早可获得的日期，使用机构记录核对。

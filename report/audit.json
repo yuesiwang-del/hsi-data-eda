@@ -1,8 +1,6 @@
 {
   "source_rows": 5398,
-  "missing_adjusted_close": 716,
   "ohlc_flagged": 2,
-  "ohlc_repaired_from_yahoo": 2,
   "exact_duplicates_removed": 0,
   "missing_activity": 0,
   "calendar_missing": 0,
